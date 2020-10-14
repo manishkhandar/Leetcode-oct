@@ -1,0 +1,21 @@
+class Solution {
+    static bool cmp(const vector<int> &a, const vector<int> &b)
+    {
+        return a[1]<b[1];
+    }
+public:
+    int findMinArrowShots(vector<vector<int>>& p) {
+        if(p.size()==0 or p.size()==1)
+            return p.size();
+        sort(p.begin(),p.end(),cmp);
+        int ans=1,prev=p[0][1];
+        for(int i=1;i<p.size();i++)
+        {
+            if(p[i][0] <= prev)
+                continue;
+            else
+                ans++,prev=p[i][1];
+        }
+        return ans;
+    }
+};

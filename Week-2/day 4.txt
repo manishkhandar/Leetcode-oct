@@ -1,0 +1,25 @@
+class Solution {
+public:
+    string removeDuplicateLetters(string s) {
+        vector<int> f(256);
+        for(auto i:s)
+            f[i]++;
+        stack<char> st;
+        set<char> ss;
+        for(auto i:s)
+        {
+            f[i]--;
+            if(ss.find(i)!=ss.end())
+                continue;
+            while(st.size() and st.top()>i and f[st.top()]>0)
+                ss.erase(st.top()),st.pop();
+            ss.insert(i);
+            st.push(i);
+        }
+        string ans;
+        while(st.size())
+            ans+=st.top(),st.pop();
+        reverse(ans.begin(),ans.end());
+        return ans;
+    }
+};
