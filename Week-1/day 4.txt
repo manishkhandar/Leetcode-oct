@@ -1,0 +1,22 @@
+class Solution {
+    static bool cmp (const vector<int> a, const vector<int> b)
+    {
+        if(a[0]==b[0])
+            return a[1]>b[1];
+        else
+            return a[0]<b[0];
+    }
+public:
+    int removeCoveredIntervals(vector<vector<int>>& in) {
+        sort(in.begin(),in.end(),cmp);
+        int j=1,s=in[0][0],e=in[0][1];
+        for(int i=1;i<in.size();i++)
+        {
+            if(in[i][0] >= s and in[i][1] <= e)
+                continue;
+            else
+                j++,s=in[i][0],e=in[i][1];
+        }
+        return j;
+    }
+};
